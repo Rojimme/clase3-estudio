@@ -1,11 +1,10 @@
-import { ADD_TASK, DELETE_TASK} from './TaskActionTypes';
 
-		export const addTaskAction = taskDescription => ({
-			type: ADD_TASK,
-			payload: taskDescription,
-		});
+import { TOGGLE_COURSE } from './TaskActionTypes';
 
-		export const deleteTaskAction = taskDescription => ({
-			type: DELETE_TASK,
-			payload: taskDescription,
-		});
+export const toggleCourse = courseId => {
+  const action = {
+    type: TOGGLE_COURSE,
+    payload: courseId 
+  };
+  return action;
+};

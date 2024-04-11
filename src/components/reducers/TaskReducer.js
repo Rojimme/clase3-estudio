@@ -1,32 +1,25 @@
-import { ADD_TASK, DELETE_TASK} from '../actions/TaskActionTypes';
+// src/components/reducers/TaskReducer.js
 
-		const INITIAL_STATE = {
-			todoTasks: [],
-		};
+import { TOGGLE_COURSE } from '../actions/TaskActionTypes';
 
-		const TaskReducer = (state = INITIAL_STATE, action) => {
-			const {todoTasks} = state;
-			let taskDescription, newState;
+const INITIAL_STATE = {
+  availableCourses: ['Matematicas', 'Ciencias', 'Sociales', 'Ingles', 'Español'],
+  selectedCourses: [],
+};
 
-			switch (action.type) {
-				case ADD_TASK:
-					taskDescription = action.payload;
-					newState = {
-						todoTasks: [...todoTasks, taskDescription],
-					};
-					return newState;
+const coursesReducer = (state = INITIAL_STATE, action) => {
+  switch (action.type) {
+    case TOGGLE_COURSE:
+      const course = action.payload;
+      const isSelected = state.selectedCourses.includes(course);
+      return {
+        ...state,
+        availableCourses: isSelected ? [...state.availableCourses, course] : state.availableCourses.filter(c => c !== course),
+        selectedCourses: isSelected ? state.selectedCourses.filter(c => c !== course) : [...state.selectedCourses, course],
+      };
+    default:
+      return state;
+  }
+};
 
-				case DELETE_TASK:
-					taskDescription = action.payload;
-					todoTasks.splice(todoTasks.indexOf(taskDescription), 1);
-					newState = {
-						todoTasks: [...todoTasks],
-					};
-					return newState;
-
-				default:
-					return state;
-			}
-		};
-
-		export default TaskReducer;
+export default coursesReducer;

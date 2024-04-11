@@ -1,33 +1,36 @@
 import React from 'react';
-		import {View, Text, TouchableOpacity} from 'react-native';
-		import {connect, useDispatch} from 'react-redux';
-		import {style_01} from '../styles/style_01';
-		import { deleteTaskAction} from '../components/actions/TaskAction';
+import { View, Text, Image, TouchableOpacity } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+import { toggleCourse } from '../components/actions/TaskAction';
+import { style_01 } from '../styles/style_01';
 
-		const TaskList = ({Tasks}) => {
-			const dispatch = useDispatch();
-			const onPressTask = taskDescription => {
-				dispatch(deleteTaskAction(taskDescription));
-			};
+const TaskList = () => {
+  const { availableCourses, selectedCourses } = useSelector(state => state.courses);
+  const dispatch = useDispatch();
 
-			return (
-				<View>
-					<View style={style_01.body}>
-						{Tasks.todoTasks.map((task, index) => (
-							<TouchableOpacity
-								key={index}
-								style={style_01.taskText}
-								onPress={() => onPressTask(task)}>
-								<Text style={style_01.text}>{task}</Text>
-							</TouchableOpacity>
-						))}
-					</View>
-				</View>
-			);
-		};
+  const handlePress = course => {
+    dispatch(toggleCourse(course));
+  };
 
-		const mapStateToProps = ({Tasks}) => {
-			return {Tasks};
-		};
+  const renderCourseList = (courses, backgroundColor, title) => (
+    <View>
+      <Text style={style_01.title}>{title}</Text>
+      {courses.map((course, index) => (
+        <TouchableOpacity key={index} style={{ ...style_01.barras, backgroundColor }} onPress={() => handlePress(course)}>
+          <Text style={style_01.text}>{course}</Text>
+        </TouchableOpacity>
+      ))}
+    </View>
+  );
 
-		export default connect(mapStateToProps)(TaskList);
+  return (
+    <View>
+      {renderCourseList(availableCourses, '#0669BF', 'Cursos Disponibles')}
+      {renderCourseList(selectedCourses, 'green', 'Cursos Seleccionados')}
+    </View>
+  );
+
+  
+};
+
+export default TaskList;

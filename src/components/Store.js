@@ -1,10 +1,13 @@
-import {combineReducers, legacy_createStore} from 'redux';
-		import TaskReducer from './reducers/TaskReducer';
+import { combineReducers, createStore } from 'redux';
+import coursesReducer from './reducers/TaskReducer';
 
-		const ConfigureStore = () => {
-			const reducers = combineReducers({Tasks: TaskReducer});
-			const store = legacy_createStore(reducers);
-			return store;
-		};
+const rootReducer = combineReducers({
+  courses: coursesReducer,
+});
 
-		export default ConfigureStore;
+const ConfigureStore = () => {
+  return createStore(rootReducer);
+};
+
+export default ConfigureStore;
+

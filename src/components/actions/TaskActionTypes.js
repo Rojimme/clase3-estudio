@@ -1,2 +1,1 @@
-export const ADD_TASK = 'Add Task';
-		export const DELETE_TASK = 'Delete Task';
+        export const TOGGLE_COURSE = 'TOGGLE_COURSE';

@@ -7,7 +7,7 @@ import React from 'react';
 		import {addTaskAction} from '../components/actions/TaskAction';
 
 		const TaskRegister = () => {
-			const [txtTask, setTxtTask] = useState('Mi primer tarea');
+			const [txtTask, setTxtTask] = useState('Practica #3');
 
 			const dispatch = useDispatch();
 			const onPressTask = taskDescription => {
@@ -19,13 +19,12 @@ import React from 'react';
 				<View>
 					<View style={style_01.titleBar}>
 						<Image source={require('../imgs/logos/logo_universidad.png')} />
-						<Text style={style_01.title}>Tasks List</Text>
 					</View>
 					<View style={style_01.row}>
 						<TextInput
 							style={style_01.entries}
 							value={txtTask}
-							placeholder={'Task todo...'}
+					
 							onChangeText={newValue => {
 								setTxtTask(newValue);
 							}}
